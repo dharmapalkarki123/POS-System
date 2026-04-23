@@ -54,7 +54,7 @@ public class SecurityConfig {
                 cfg.setMaxAge(3600L);
 
 
-                return null;
+                return cfg;
             }
         };
     }
