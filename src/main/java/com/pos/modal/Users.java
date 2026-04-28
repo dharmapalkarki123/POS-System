@@ -1,8 +1,6 @@
 package com.pos.modal;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
@@ -18,6 +16,7 @@ import java.time.LocalDateTime;
 public class Users {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @Column(unique = false)
@@ -33,6 +32,7 @@ public class Users {
     @Column(nullable = false)
     private UserRole role;
 
+    @Column(nullable = false)
     private String password;
 
     private LocalDateTime createdAt;
