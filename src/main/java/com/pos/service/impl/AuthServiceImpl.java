@@ -28,17 +28,16 @@ public class AuthServiceImpl implements AuthService {
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
-    private final CustomUserImplementation CustomUserImplementation;
     private final CustomUserImplementation customUserImplementation;
 
     public AuthServiceImpl(UsersRepository usersRepository,
                            PasswordEncoder passwordEncoder,
                            JwtProvider jwtProvider,
-                           CustomUserImplementation CustomUserImplementation, CustomUserImplementation customUserImplementation) {
+            CustomUserImplementation customUserImplementation) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
-        this.CustomUserImplementation = CustomUserImplementation;
+
         this.customUserImplementation = customUserImplementation;
     }
 

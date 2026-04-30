@@ -19,7 +19,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(unique = false)
+    @Column(unique = false,nullable = false)
     private String fullName;
 
 
