@@ -5,9 +5,10 @@ import com.pos.modal.Users;
 import com.pos.modal.storeContact;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToOne;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-
+@Data
 public class storeDto {
 
     private Long id;
