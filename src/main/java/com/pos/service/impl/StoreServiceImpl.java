@@ -3,6 +3,7 @@ package com.pos.service.impl;
 import com.pos.exception.UserException;
 import com.pos.mapper.StoreMapper;
 import com.pos.modal.Store;
+import com.pos.modal.StoreStatus;
 import com.pos.modal.Users;
 import com.pos.modal.storeContact;
 import com.pos.payload.dto.storeDto;
@@ -120,5 +121,15 @@ public class StoreServiceImpl implements StoreService {
         }
 
         return StoreMapper.toDTO(currentUser.getStore());
+    }
+
+    @Override
+    public storeDto moderateStore(Long id, StoreStatus storeStatus) throws Exception {
+        Store store=storeRepository.findById(id).orElseThrow(()-> new Exception("Store not found")
+        );
+
+        store.setStatus(storeStatus);
+        Store updatedStore=storeRepository.save(store);
+        return StoreMapper.toDTO(updatedStore);
     }
 }

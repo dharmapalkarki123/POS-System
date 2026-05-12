@@ -2,8 +2,10 @@ package com.pos.controller;
 
 import com.pos.exception.UserException;
 import com.pos.modal.Store;
+import com.pos.modal.StoreStatus;
 import com.pos.modal.Users;
 import com.pos.payload.dto.storeDto;
+import com.pos.payload.response.ApiResponse;
 import com.pos.service.StoreService;
 import com.pos.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -92,14 +94,35 @@ public class StoreController {
     public ResponseEntity<storeDto> updateStore(@PathVariable Long id,
             @RequestBody storeDto StoreDto) throws Exception {
 
+        Users currentUser = userService.getCurrentUser();
 
-
-        return ResponseEntity.ok(storeService.updateStore(id, StoreDto);
+        return ResponseEntity.ok(storeService.updateStore(id, StoreDto,currentUser));
 
 
     }
 
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse> deleteStore(@PathVariable Long id
+                                                  ) throws Exception {
+
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setMessage("User deleted successfully");
+
+        return ResponseEntity.ok(apiResponse);
+
+    }
+
+
+    @GetMapping("/{id}/moderate")
+    public ResponseEntity<storeDto> moderateStore(@PathVariable Long id,
+                                                  @RequestParam StoreStatus storeStatus
+    ) throws Exception {
+
+
+        return ResponseEntity.ok(storeService.moderateStore(id, storeStatus));
+
+    }
 
 
 }

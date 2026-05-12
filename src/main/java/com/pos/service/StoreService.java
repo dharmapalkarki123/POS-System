@@ -2,6 +2,7 @@ package com.pos.service;
 
 import com.pos.exception.UserException;
 import com.pos.modal.Store;
+import com.pos.modal.StoreStatus;
 import com.pos.modal.Users;
 import com.pos.payload.dto.storeDto;
 
@@ -15,4 +16,5 @@ public interface StoreService {
     storeDto updateStore(Long id, storeDto StoreDto, Users users) throws Exception;
     void deleteStore(Long id) throws UserException;
     storeDto getStoreByEmployee() throws UserException;
+    storeDto moderateStore(Long id, StoreStatus storeStatus) throws Exception;
 }
