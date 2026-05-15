@@ -2,14 +2,24 @@ package com.pos.service.impl;
 
 import com.pos.modal.Users;
 import com.pos.payload.dto.ProductDto;
+import com.pos.repository.ProductRepository;
 import com.pos.service.ProductService;
 
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
+
+    private ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+
+
     @Override
-    public ProductDto createProduct(ProductDto productDto, Users user) {
-        return null;
+    public ProductDto createProduct(ProductDto productDto, Users user) {;
+
     }
 
     @Override
