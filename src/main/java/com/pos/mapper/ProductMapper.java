@@ -6,7 +6,7 @@ import com.pos.payload.dto.ProductDto;
 
 public class ProductMapper {
 
-    public ProductDto toDTO(Product product){
+    public static ProductDto toDTO(Product product){
 
 
         return ProductDto.builder()
@@ -25,7 +25,7 @@ public class ProductMapper {
 
     }
 
-    public Product toEntity(ProductDto productDto, Store store){
+    public static Product toEntity(ProductDto productDto, Store store){
 
 
         return Product.builder()

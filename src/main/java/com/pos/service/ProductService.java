@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductDto createProduct(ProductDto productDto, Users user);
-    ProductDto updateProduct(ProductDto productDto, Users user);
+    ProductDto createProduct(ProductDto productDto, Users user) throws Exception;
+    ProductDto updateProduct(Long id,ProductDto productDto, Users user) throws Exception;
 
-    void deleteProduct(Long id, Users user);
+    void deleteProduct(Long id, Users user) throws Exception;
 
     List<ProductDto> getProductByStoreId(Long storeId);
 
