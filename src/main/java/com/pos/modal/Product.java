@@ -33,6 +33,9 @@ public class Product {
     private String image;
 
     @ManyToOne
+    private Category category;
+
+    @ManyToOne
     private Store store;
 
     private LocalDateTime createdAt;

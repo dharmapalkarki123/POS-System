@@ -70,7 +70,7 @@ public class ProductController {
     }
 
 
-    @DeleteMapping("/{id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteProduct(@PathVariable Long id,
                                                      @RequestHeader("Authorization")String jwt) throws Exception {
 

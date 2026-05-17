@@ -1,10 +1,12 @@
 package com.pos.service.impl;
 
 import com.pos.mapper.ProductMapper;
+import com.pos.modal.Category;
 import com.pos.modal.Product;
 import com.pos.modal.Store;
 import com.pos.modal.Users;
 import com.pos.payload.dto.ProductDto;
+import com.pos.repository.CategoryRepository;
 import com.pos.repository.ProductRepository;
 import com.pos.repository.StoreRepository;
 import com.pos.service.ProductService;
@@ -20,10 +22,12 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final StoreRepository storeRepository;
+    private CategoryRepository categoryRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, StoreRepository storeRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, StoreRepository storeRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.storeRepository = storeRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -35,7 +39,11 @@ public class ProductServiceImpl implements ProductService {
                 () -> new Exception("Store not found")
         );
 
-        Product product = ProductMapper.toEntity(productDto, store);
+        Category category=categoryRepository.findById(productDto.getCategoryId()).orElseThrow(
+                () -> new Exception("Category not found")
+        );
+
+        Product product = ProductMapper.toEntity(productDto, store,category);
         Product savedProduct = productRepository.save(product);
 
         return ProductMapper.toDTO(savedProduct);
@@ -50,6 +58,10 @@ public class ProductServiceImpl implements ProductService {
                 () -> new Exception("Product Not found")
         );
 
+
+
+
+
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setSku(productDto.getSku());
@@ -58,6 +70,17 @@ public class ProductServiceImpl implements ProductService {
         product.setSellingPrice(productDto.getSellingPrice());
         product.setBrand(productDto.getBrand());
         product.setUpdatedAt(LocalDateTime.now());
+
+        if(productDto.getCategoryId()!=null){
+            Category category=categoryRepository.findById(productDto.getCategoryId()).orElseThrow(
+                    () -> new Exception("Category not found")
+            );
+
+            product.setCategory(category);
+        }
+
+
+
         Product savedProduct = productRepository.save(product);
         return ProductMapper.toDTO(savedProduct);
 

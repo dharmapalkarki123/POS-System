@@ -3,6 +3,7 @@ package com.pos.service.impl;
 import com.pos.mapper.CategoryMapper;
 import com.pos.modal.Category;
 import com.pos.modal.Store;
+import com.pos.modal.UserRole;
 import com.pos.modal.Users;
 import com.pos.payload.dto.CategoryDto;
 import com.pos.repository.CategoryRepository;
@@ -44,12 +45,13 @@ public class CategoryServiceImpl implements CategoryService {
                 .name(categoryDto.getName())
                 .build();
 
+        checkAuthority(user,category.getStore());
 
-        return CategoryMapper.toDTO(category);
+        return CategoryMapper.toDTO(categoryRepository.save(category));
     }
 
     @Override
-    public List<CategoryDto> geCategories(Long storeId) {
+    public List<CategoryDto> getCategories(Long storeId) {
 
         List<Category> categories = categoryRepository.findByStoreId(storeId);
 
@@ -69,6 +71,8 @@ public class CategoryServiceImpl implements CategoryService {
 
         Users user = userService.getCurrentUser();
 
+        checkAuthority(user,category.getStore());
+
         category.setName(categoryDto.getName());
 
 
@@ -83,8 +87,32 @@ public class CategoryServiceImpl implements CategoryService {
         );
 
         Users user = userService.getCurrentUser();
+        checkAuthority(user,category.getStore());
+
         categoryRepository.delete(category);
 
 
     }
+
+
+
+    private void checkAuthority(Users user,Store store) throws Exception {
+
+        boolean isAdmin=user.getRole().equals(UserRole.ROLE_STORE_ADMIN);
+        boolean isManager=user.getRole().equals(UserRole.ROLE_STORE_MANAGER);
+        boolean isSameStore=user.equals(store.getStoreAdmin());
+
+        if(!(isAdmin && isSameStore)&& !isManager){
+
+            throw new Exception("you don't have permission ");
+
+
+
+        }
+
+
+
+
+    }
+
 }

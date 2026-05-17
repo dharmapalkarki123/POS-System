@@ -31,6 +31,8 @@ public class ProductDto {
 
     private String image;
 
+    private CategoryDto category;
+
    private Long categoryId;
 
     private Long StoreId;
