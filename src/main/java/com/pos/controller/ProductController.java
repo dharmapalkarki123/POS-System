@@ -37,7 +37,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/{storeId}")
     public ResponseEntity<List<ProductDto>> getByStoreId(@PathVariable Long storeId,
                                                          @RequestHeader("Authorization")String jwt) throws Exception {
 

@@ -1,6 +1,6 @@
 package com.pos.controller;
 
-import com.pos.exception.UserException;
+import com.pos.exception.UserException ;
 import com.pos.payload.dto.userDto;
 import com.pos.payload.response.AuthResponse;
 import com.pos.service.AuthService;
