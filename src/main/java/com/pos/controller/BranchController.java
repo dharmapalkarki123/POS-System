@@ -62,7 +62,7 @@ public class BranchController {
 	
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<BranchDto> updateBranch11(@PathVariable Long id,BranchDto branchDto) throws Exception{
+	public ResponseEntity<BranchDto> updateBranch11(@PathVariable Long id,@RequestBody BranchDto branchDto) throws Exception{
 		
 		BranchDto updatedBranch=branchService.updateBranch(id, branchDto);
 		

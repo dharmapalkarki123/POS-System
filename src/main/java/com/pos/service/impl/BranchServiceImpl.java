@@ -67,6 +67,7 @@ public class BranchServiceImpl implements BranchService{
 
 	@Override
 	public BranchDto updateBranch(Long id, BranchDto branchDto) throws Exception {
+		/*
 		Branch existing =branchRepository.findById(id).orElseThrow(
 				()-> new Exception("Branch Not found")
 				);
@@ -82,7 +83,28 @@ public class BranchServiceImpl implements BranchService{
 		
 		Branch updatedBranch=branchRepository.save(existing);
 		
-		
+		*/
+		Branch existing=branchRepository.findById(id).orElseThrow(
+				()->new Exception("Branch Not Found")
+		);
+
+		existing.setName(branchDto.getName());
+		existing.setWorkingDays(branchDto.getWorkingDays());
+		existing.setEmail(branchDto.getEmail());
+		existing.setPhone(branchDto.getPhone());
+		existing.setAddress(branchDto.getAddress());
+		existing.setOpenTime(branchDto.getOpenTime());
+		existing.setCloseTime(branchDto.getCloseTime());
+		existing.setUpdatedAt(LocalDateTime.now());
+
+		Branch updatedBranch=branchRepository.save(existing);
+
+
+
+
+
+
+
 		return BranchMapper.toDTO(updatedBranch);
 	}
 
