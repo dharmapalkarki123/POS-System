@@ -23,12 +23,19 @@ public class Users {
     private String fullName;
 
 
+
+
     @Column(nullable = false,unique = true)
     @Email(message = "Email should be valid")
     private String email;
 
     @ManyToOne
     private Store store;
+
+    @ManyToOne
+    private Branch branch;
+
+
 
     private String phone;
 

@@ -19,6 +19,8 @@ public class userDto {
     private String fullName;
 
 
+    private Long storeId;
+    private Long branchId;
 
     private String email;
 
