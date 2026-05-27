@@ -15,7 +15,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String fullName;
 
     @ManyToOne
     Store store;
