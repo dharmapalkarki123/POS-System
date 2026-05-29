@@ -9,16 +9,20 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Category {
+public class OrderItems {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private Integer quantity;
+
+    private Double price;
 
     @ManyToOne
-    Store store;
+    private Product product;
 
+    @ManyToOne
+    private Order order;
 
 }

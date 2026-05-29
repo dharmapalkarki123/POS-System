@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer updateCustomer=customerRepository.findById(id).orElseThrow(
         ()-> new Exception("Customer not found"));
 
-        updateCustomer.setFirstName(customer.getFirstName());
+        updateCustomer.setFullName(customer.getFullName());
         updateCustomer.setEmail(customer.getEmail());
         updateCustomer.setPhone(customer.getPhone());
 
