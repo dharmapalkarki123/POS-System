@@ -35,4 +35,11 @@ public class Order {
       private List<OrderItems> items;
 
 
+    @PrePersist
+    protected void onCreate(){
+        createdAt = LocalDateTime.now();
+
+
+    }
+
 }
