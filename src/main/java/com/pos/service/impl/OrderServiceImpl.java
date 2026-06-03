@@ -1,15 +1,58 @@
 package com.pos.service.impl;
 
-import com.pos.modal.OrderStatus;
-import com.pos.modal.PaymentType;
+import com.pos.exception.UserException;
+import com.pos.modal.*;
 import com.pos.payload.dto.OrderDto;
+import com.pos.repository.OrderRepository;
+import com.pos.repository.ProductRepository;
 import com.pos.service.OrderService;
+import com.pos.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
+
+    private OrderRepository orderRepository;
+    private ProductRepository productRepository;
+    private UserService userService;
+    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserService userService) {
+        this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
+        this.userService = userService;
+    }
+
     @Override
-    public OrderDto createOrder(OrderDto orderDto) {
+    public OrderDto createOrder(OrderDto orderDto) throws UserException {
+        Users cashier=userService.getCurrentUser();
+
+        Branch branch=cashier.getBranch();
+        if(branch==null){
+            throw new UserException("cashier's Branch not found");
+        }
+
+        Order order=Order.builder()
+                .branch(branch)
+                .cashier(cashier)
+                .customer(orderDto.getCustomer())
+                .paymentType(orderDto.getPaymentType())
+                .build();
+
+        List<OrderItems> orderItems=orderDto.getItems().stream().map(
+                itemDto->{
+                    Product product=productRepository.findById(itemDto.getProductId())
+                            .orElseThrow(()->new EntityNotFoundException("Product not found"));
+
+                    return OrderItems.builder()
+                            .product(product)
+                            .quantity(itemDto.getQuantity())
+                            .price(product.getSellingPrice()*itemDto.getQuantity())
+                            .order(order)
+                            .build();
+
+                }
+        ).toList();
+
         return null;
     }
 

@@ -1,5 +1,6 @@
 package com.pos.service;
 
+import com.pos.exception.UserException;
 import com.pos.modal.OrderStatus;
 import com.pos.modal.PaymentType;
 import com.pos.payload.dto.OrderDto;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderDto createOrder(OrderDto orderDto);
+    OrderDto createOrder(OrderDto orderDto) throws UserException;
     OrderDto getOrderById(Long id) throws  Exception;
 
     List<OrderDto> getOrdersByBranch(Long branchId,

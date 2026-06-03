@@ -23,6 +23,7 @@ public class OrderItems {
     private Product product;
 
     @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
 
 }

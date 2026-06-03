@@ -1,6 +1,6 @@
 package com.pos.configuration;
 
-import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Claims ;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
@@ -17,6 +17,7 @@ import java.util.Set;
 public class JwtProvider {
 
     static SecretKey key= Keys.hmacShaKeyFor(JwtConstant.JWT_SECRET.getBytes());
+    
     public String generateToken(Authentication authentication){
 
         Collection<? extends GrantedAuthority> authorities=authentication

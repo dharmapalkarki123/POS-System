@@ -1,6 +1,7 @@
 package com.pos.modal;
 
-import java.time.LocalDateTime;
+import
+		java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 

@@ -29,9 +29,12 @@ public class Order {
      private Users cashier;
 
       @ManyToOne
+      
       private Customer customer;
+      
+      private PaymentType paymentType;
 
-      @OneToMany
+      @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
       private List<OrderItems> items;
 
 

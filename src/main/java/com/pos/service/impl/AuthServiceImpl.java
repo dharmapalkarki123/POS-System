@@ -1,6 +1,6 @@
 package com.pos.service.impl;
 
-import com.pos.configuration.JwtProvider; 
+import com.pos.configuration.JwtProvider;  
 import com.pos.exception.UserException;
 import com.pos.mapper.UserMapper;
 import com.pos.modal.UserRole;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-
+ 
 @Service
 public class AuthServiceImpl implements AuthService {
 

@@ -18,6 +18,7 @@ public class OrderItemsDto {
 
     private ProductDto product;
 
+    private Long productId;
 
     private OrderDto order;
 
