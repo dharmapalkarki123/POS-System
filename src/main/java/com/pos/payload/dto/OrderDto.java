@@ -7,6 +7,7 @@ import com.pos.modal.PaymentType;
 import com.pos.modal.Users;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
@@ -25,6 +26,8 @@ public class OrderDto {
     private LocalDateTime createdAt;
 
     private Long customerId;
+
+    @NotNull
     private Long branchId;
 
     private BranchDto branch;

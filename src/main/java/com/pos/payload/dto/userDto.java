@@ -1,6 +1,7 @@
 package com.pos.payload.dto;
 
 import com.pos.modal.UserRole;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import lombok.Builder;
@@ -20,6 +21,9 @@ public class userDto {
 
 
     private Long storeId;
+
+
+
     private Long branchId;
 
     private String email;

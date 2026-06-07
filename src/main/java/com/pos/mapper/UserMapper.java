@@ -1,5 +1,6 @@
 package com.pos.mapper;
 
+import com.pos.modal.Branch;
 import com.pos.modal.Users;
 import com.pos.payload.dto.userDto;
 
@@ -37,6 +38,9 @@ public class UserMapper {
         createdUser.setUpdatedAt(UserDto.getUpdatedAt());
         createdUser.setLastLogin(UserDto.getLastLogin());
         createdUser.setPhone(UserDto.getPhone());
+        createdUser.setBranch(Branch.builder()
+                        .id(UserDto.getBranchId())
+                .build());
 
         createdUser.setPassword(UserDto.getPassword());
 
