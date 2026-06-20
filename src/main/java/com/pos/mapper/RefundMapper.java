@@ -9,16 +9,13 @@ public class RefundMapper {
     public static RefundDto toDto(Refund refund) {
         return RefundDto.builder()
                 .id(refund.getId())
-                .orderId(refund.getOrder().getId())
+                .orderId(refund.getOrder() != null ? refund.getOrder().getId() : null)
                 .amount(refund.getAmount())
                 .reason(refund.getReason())
-                .cashierName(refund.getCashier().getFullName())
-                .branchId(refund.getBranch().getId())
-                .ShiftReportId(refund.getShiftReport().getId())
+                .cashierName(refund.getCashier() != null ? refund.getCashier().getFullName() : null)
+                .branchId(refund.getBranch() != null ? refund.getBranch().getId() : null)
+                .shiftReportId(refund.getShiftReport() != null ? refund.getShiftReport().getId() : null)
                 .createdAt(refund.getCreatedAt())
                 .build();
-
-
     }
-
 }

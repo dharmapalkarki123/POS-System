@@ -16,32 +16,14 @@ import java.time.LocalDateTime;
 public class RefundDto {
 
     private Long id;
-
-
-    private OrderDto order;
     private Long orderId;
-
     private String reason;
-
     private Double amount;
-
-
-//    private ShiftReport shiftReport;
-    private Long ShiftReportId;
-
-
-
-    private userDto cashier;
-
+    private Long shiftReportId;
+    private Long cashierId;
     private String cashierName;
-
-
-    private BranchDto branch;
-
     private Long branchId;
-
     private PaymentType paymentType;
-
     private LocalDateTime createdAt;
 
 }

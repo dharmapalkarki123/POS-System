@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class RefundServiceImpl implements RefundService {
 
@@ -31,9 +33,11 @@ public class RefundServiceImpl implements RefundService {
     @Override
     public RefundDto createRefund(RefundDto refund) throws UserException {
 
+
+
         Users cashier=userService.getCurrentUser();
 
-        Order order=orderRepository.findById(refund.getOrder().getId()).orElseThrow(
+        Order order=orderRepository.findById(refund.getOrderId()).orElseThrow(
                 ()-> new UserException("Order not found")
         );
 
@@ -55,36 +59,55 @@ public class RefundServiceImpl implements RefundService {
 
     @Override
     public List<RefundDto> getAllRefund() throws Exception {
-        return List.of();
+        return refundRepository.findAll()
+                .stream()
+                .map(RefundMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public RefundDto getRefundCashier(Long cashierId) throws Exception {
-        return null;
+    public List<RefundDto> getRefundCashier(Long cashierId) throws Exception {
+        return refundRepository.findByCashierId(cashierId)
+                .stream().map(RefundMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public RefundDto getRefundByShiftReport(Long shiftReportId) throws Exception {
-        return null;
+    public List<RefundDto> getRefundByShiftReport(Long shiftReportId) throws Exception {
+        return refundRepository.findByShiftReportId(shiftReportId)
+                .stream().map(RefundMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<RefundDto> getAllRefundByCashierAndDateRange(Long cashierId, LocalDateTime startDate, LocalDateTime endDate) throws Exception {
-        return List.of();
+        return refundRepository.findByCashierIdAndCreatedAtBetween(
+                cashierId,
+                startDate,
+                endDate
+        ).stream().map(RefundMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<RefundDto> getRefundByBranch(Long branchId) throws Exception {
-        return List.of();
+        return refundRepository.findByBranchId(branchId)
+                .stream().map(RefundMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public RefundDto getRefundById(Long refundId) throws Exception {
-        return null;
+        return refundRepository.findById(refundId)
+                .map(RefundMapper::toDto).orElseThrow(
+                        ()-> new UserException("Refund not found")
+                );
     }
 
     @Override
     public void deleteRefund(Long refundId) throws Exception {
+
+        Refund refund=refundRepository.findById(refundId).orElseThrow(
+                ()-> new UserException("Refund not found")
+        );
+
+        refundRepository.delete(refund);
+
 
     }
 }

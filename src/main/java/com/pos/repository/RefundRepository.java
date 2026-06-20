@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface RefundRepository extends JpaRepository<Refund, Long> {
 
-    List<Refund> findByCashierAndCreatedAtBetween(
-            Users cashier,
+    List<Refund> findByCashierIdAndCreatedAtBetween(
+            Long cashier,
             LocalDateTime from,
             LocalDateTime to
     );
 
     List<Refund> findByCashierId(Long id);
-    List<Refund> findByShiftReport(Long id);
+    List<Refund> findByShiftReportId(Long id);
     List<Refund> findByBranchId(Long id);
 
 
