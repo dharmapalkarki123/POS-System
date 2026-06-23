@@ -13,7 +13,7 @@ public interface ShiftReportRepository extends JpaRepository<ShiftReport, Long> 
   List<ShiftReport> findByCashierId(Long id);
   List<ShiftReport> findByBranchId(Long id);
 
-  Optional<ShiftReport> findByTopCashierAndShiftEndIsNullOrderByShiftStartDesc(
+  Optional<ShiftReport> findTopByCashierAndShiftEndIsNullOrderByShiftStartDesc(
           Users cashier);
 
   Optional<ShiftReport> findByCashierAndShiftStartBetween(Users cashier,

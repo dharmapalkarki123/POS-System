@@ -9,12 +9,11 @@ import java.util.List;
 
 public interface ShiftReportService {
 
-    shiftReportDto startShift(Long cashierId, Long branchId,
-                              LocalDateTime shiftStart) throws Exception;
+    shiftReportDto startShift() throws Exception;
     shiftReportDto endShift(Long shiftReportId, LocalDateTime shiftEnd)
             throws Exception;
 
-    shiftReportDto getShiftReportId(Long id);
+    shiftReportDto getShiftReportId(Long id) throws Exception;
 
     List<shiftReportDto> getAllShiftReports();
 
