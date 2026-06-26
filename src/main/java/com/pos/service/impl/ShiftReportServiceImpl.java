@@ -152,7 +152,7 @@ public class ShiftReportServiceImpl implements ShiftReportService {
         );
 
         List<Refund> refunds=refundRepository.findByCashierIdAndCreatedAtBetween(currentUser.getId(),
-                shiftReport.getShiftStart(), shiftReport.getShiftEnd());
+                shiftReport.getShiftStart(), now);
 
         double totalRefund=refunds.stream().mapToDouble(
                 refund ->refund.getAmount()!=null?
@@ -197,7 +197,7 @@ public class ShiftReportServiceImpl implements ShiftReportService {
         ShiftReport report=shiftReportRepository.findByCashierAndShiftStartBetween(
                 cashier,start,end
         ).orElseThrow(
-                ()->new Exception("shift report not found for cashier")
+                ()->new Exception("shift report not found for date")
         );
 
         return ShiftReportMapper.toDto(report);
