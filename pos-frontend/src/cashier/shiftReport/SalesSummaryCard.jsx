@@ -9,7 +9,7 @@ const shiftData = {
   shiftStart: "June 29, 2026 6:54 PM",
   shiftEnd: "",
   totalOrders: 50,
-  totalSales: 500.00,
+  totalSales: 9000.00,
   totalRefunds: 4689,
   netSale: 322,
 };
@@ -53,8 +53,8 @@ const SalesSummaryCard = () => {
 
 
 
-                    <div className="flex justify-between">
-                     <span className="text-muted-foreground">Net Sales:</span>
+                    <div className="flex justify-between border-t">
+                     <span className="text-muted-foreground  font-bold">Net Sales:</span>
                      <span className="font-medium">{shiftData.netSale}</span>
                    </div>
 
